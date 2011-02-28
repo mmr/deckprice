@@ -73,6 +73,7 @@ class Deck {
         asort($ord);
 
         $s = "";
+        $tc = 0;
         $total = 0;
         foreach ($ord as $n => $v) {
             $c = $this->cards[$n]; 
@@ -88,8 +89,9 @@ class Deck {
 
             $s .= "$sa x $sn = $sa x$sp =$st" . PHP_EOL;
             $total += $t;
+            $tc += $a;
         }
-        $s .= "TOTAL: $total" . PHP_EOL;
+        $s .= "TOTAL: $tc cards : $total" . PHP_EOL;
         return $s;
     }
 }
@@ -182,8 +184,7 @@ class TxtDeckReader implements DeckReader {
             if (preg_match("/^(\d+)\s*(.*)$/", $line, $matches)) {
                 $d->addCard(trim($matches[2]), $matches[1]);
             } else {
-                die("Incorrect format at line: $line\nExpected format: <amount>"
-                  . "<card name>\nExample:\n2 Mountain Goat\n4 Giant Growth\n");
+                die("Incorret format at line: $line\n");
             }
         }
         return $d;
