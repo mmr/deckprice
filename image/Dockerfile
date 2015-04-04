@@ -5,7 +5,7 @@ ENV TERM xterm-color
 
 RUN apt-get update -q && apt-get install -qy php5-cli 
 
-COPY ../price.php /usr/bin/price.php
+COPY price.php /usr/bin/price.php
 COPY run_price.sh /usr/bin/run_price.sh
 
 WORKDIR /data
