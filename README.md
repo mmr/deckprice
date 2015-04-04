@@ -11,25 +11,40 @@ the prices for a deck in a simple format.
 Usage:
 -----
 
+DeckPrice was written in PHP.
+
+If you have php-cli installed:
 ```bash
 # To calculate the price of a deck in cod format (cockatrice format)
 $ php price.php file.cod
 
 # To caulcate the price of a deck in simple txt format
 $ php price.php file.txt txt
-
-# To use the docker container to check a deck price
-
-# COD format
-docker run -i --rm -v $PWD:/data mribeiro/deckprice file.cod
-
-# Txt format
-docker run -i --rm -v $PWD:/data mribeiro/deckprice file.txt txt
 ```
 
-Examples:
------
+If you do not want to install _php-cli_ and yadda-yadda, you can use
+the container we have prepared for you.
 
+You can get the container image from docker hub or build it locally.
+```bash
+# To get the image from docker hub
+$ docker pull mribeiro/deckprice
+
+# To build it locally (which is way cooler)
+$ make build-image
+```
+
+Now that you have the image, you can use the shell script we have
+provided that runs the container:
+```bash
+# To use the docker container to check a deck price
+$ ./calc.sh file.cod
+
+# Txt format
+$ ./calc.sh file.txt txt
+```
+
+Or if have masochistic tendencies, you can run the container by hand:
 ```bash
 # Using the container to check the price of the Treefolk deck
 $ docker run -i --rm -v $PWD:/data mribeiro/deckprice examples/treefolk.cod
