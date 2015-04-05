@@ -14,6 +14,7 @@ Usage:
 DeckPrice was written in PHP.
 
 If you have php-cli installed:
+
 ```bash
 # To calculate the price of a deck in cod format (cockatrice format)
 php price.php file.cod
@@ -26,6 +27,7 @@ If you do not want to install _php-cli_ and yadda-yadda, you can use
 the container we have prepared for you.
 
 You can get the container image from docker hub or build it locally.
+
 ```bash
 # To get the image from docker hub
 docker pull mribeiro/deckprice
@@ -45,6 +47,7 @@ provided that runs the container:
 ```
 
 Or if have masochistic tendencies, you can run the container by hand:
+
 ```bash
 # Using the container to check the price of the Treefolk deck
 docker run -i --rm -v $PWD:/data mribeiro/deckprice examples/treefolk.cod
