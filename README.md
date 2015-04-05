@@ -38,6 +38,7 @@ make build-image
 
 Now that you have the image, you can use the shell script we have
 provided that runs the container:
+
 ```bash
 # To use the docker container to check a deck price
 ./calc.sh file.cod
