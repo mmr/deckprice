@@ -20,7 +20,7 @@ If you have php-cli installed:
 php price.php file.cod
 
 # To caulcate the price of a deck in simple txt format
-php price.php file.txt txt
+php price.php file.txt
 ```
 
 If you do not want to install _php-cli_ and yadda-yadda, you can use
@@ -44,7 +44,7 @@ provided that runs the container:
 ./calc.sh file.cod
 
 # Txt format
-./calc.sh file.txt txt
+./calc.sh file.txt
 ```
 
 Or if have masochistic tendencies, you can run the container by hand:
@@ -70,7 +70,7 @@ docker run -i --rm -v $PWD:/data mribeiro/deckprice examples/treefolk.cod
 TOTAL: 60 cards : 57.72
 
 # Using the container to check the price of the Myr deck
-docker run -i --rm -v $PWD:/data mribeiro/deckprice examples/myr.txt txt
+docker run -i --rm -v $PWD:/data mribeiro/deckprice examples/myr.txt
 2 x Myr Battlesphere  = 2 x 0.47 = 0.94
 4 x Silver Myr        = 4 x 0.25 = 1.00
 2 x Voltaic Key       = 2 x 0.55 = 1.10
