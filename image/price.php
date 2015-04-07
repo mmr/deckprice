@@ -208,7 +208,7 @@ class CockatriceDeckReader implements DeckReader {
 }
 
 if (!isset($argv[1])) {
-    die("Usage: " . $argv[0] . " file [txt]\n");
+    die("Usage: " . $argv[0] . " file\n");
 }
 
 $f = $argv[1];
@@ -216,13 +216,8 @@ if (!is_readable($f)) {
     die("File $f not found\n");
 }
 
-$r = null;
-if (isset($argv[2])) {
-    $r = new TxtDeckReader();    
-} else {
-    $r = new CockatriceDeckReader();
-}
-
+$ext = pathinfo($argv[1], PATHINFO_EXTENSION);
+$r = ($ext == 'cod' ? new CockatriceDeckReader() : new TxtDeckReader());
 $d = $r->readDeck($f);
 $d->updatePrices();
 print $d;
