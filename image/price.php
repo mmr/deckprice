@@ -36,14 +36,14 @@ class Deck {
             $cs .= urlencode($n) . '|';
         }
 
-        $u = URL . $cs;
+        $url = URL . $cs;
 
-        $j = file_get_contents($u);
-        $d = json_decode($j, true);
+        $json = file_get_contents($url);
+        $data = json_decode($json, true);
 
-        foreach ($d['cards'] as $c) {
-            $n = strtolower($c['name']);
-            $this->cards[$n]->updatePrice($c['average']);
+        foreach ($data['cards'] as $card) {
+            $name = strtolower($card['name']);
+            $this->cards[$name]->updatePrice($card['average']);
         }
     }
 
@@ -156,7 +156,7 @@ interface DeckReader {
      * @param file name of the file with the deck description.
      * @return deck object created from the given file.
      */
-    public function readDeck($f);
+    public function readDeck($file);
 }
 
 /**
@@ -174,36 +174,36 @@ interface DeckReader {
 class TxtDeckReader implements DeckReader {
     /**
      * Read deck from txt file.
-     * @param $f name of the file with the deck description.
+     * @param $file name of the file with the deck description.
      * @return deck object.
      */
-    public function readDeck($f) {
-        $d = new Deck();
-        $lines = file($f);
+    public function readDeck($file) {
+        $deck = new Deck();
+        $lines = file($file);
         foreach ($lines as $line) {
             if (preg_match("/^(\d+)\s*(.*)$/", $line, $matches)) {
-                $d->addCard(trim($matches[2]), $matches[1]);
+                $deck->addCard(trim($matches[2]), $matches[1]);
             } else {
                 die("Incorret format at line: $line\n");
             }
         }
-        return $d;
+        return $deck;
     }
 }
 
 /**
  * Deck reader that understands the Cockatrice deck format.
- * @param $f file with deck description in cockatrice format.
+ * @param $file file with deck description in cockatrice format.
  * @return deck object.
  */
 class CockatriceDeckReader implements DeckReader {
-    public function readDeck($f) {
-        $d = new Deck();
-        $xml = simplexml_load_file($f);
-        foreach ($xml->zone->card as $c) {
-            $d->addCard($c['name'], $c['number']);
+    public function readDeck($file) {
+        $deck = new Deck();
+        $xml = simplexml_load_file($file);
+        foreach ($xml->zone->card as $card) {
+            $deck->addCard($card['name'], $card['number']);
         }
-        return $d;
+        return $deck;
     }
 }
 
