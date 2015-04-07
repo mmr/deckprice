@@ -211,14 +211,14 @@ if (!isset($argv[1])) {
     die("Usage: " . $argv[0] . " file\n");
 }
 
-$f = $argv[1];
-if (!is_readable($f)) {
-    die("File $f not found\n");
+$file = $argv[1];
+if (!is_readable($file)) {
+    die("File $file not found\n");
 }
 
-$ext = pathinfo($argv[1], PATHINFO_EXTENSION);
-$r = ($ext == 'cod' ? new CockatriceDeckReader() : new TxtDeckReader());
-$d = $r->readDeck($f);
-$d->updatePrices();
-print $d;
+$ext = pathinfo($file, PATHINFO_EXTENSION);
+$reader = $ext == 'cod' ? new CockatriceDeckReader() : new TxtDeckReader();
+$deck = $reader->readDeck($file);
+$deck->updatePrices();
+print $deck;
 ?>
